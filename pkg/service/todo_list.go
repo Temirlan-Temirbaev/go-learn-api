@@ -20,6 +20,10 @@ func (service *TodoListService) GetAll(userId int) ([]todo.TodoList, error) {
 	return service.repo.GetAll(userId)
 }
 
-func (service *TodoListService) GetById(userId int, todoId int) (todo.TodoList, error) {
-	return service.repo.GetById(userId, todoId)
+func (service *TodoListService) GetById(userId int, listId int) (todo.TodoList, error) {
+	return service.repo.GetById(userId, listId)
+}
+
+func (service *TodoListService) Delete(userId int, listId int) error {
+	return service.repo.Delete(userId, listId)
 }
