@@ -74,10 +74,6 @@ func (h *Handler) getListById(c *gin.Context) {
 	})
 }
 
-type updateListResponse struct {
-	Success string `json:"data"`
-}
-
 func (h *Handler) updateList(c *gin.Context) {
 	userId, err := getUserId(c)
 	if err != nil {
@@ -95,15 +91,13 @@ func (h *Handler) updateList(c *gin.Context) {
 		newErrorResponse(c, http.StatusBadRequest, err.Error())
 		return
 	}
-	if err := h.services.Update(userId, id, input); err != nil {
+	if err := h.services.TodoList.Update(userId, id, input); err != nil {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, updateListResponse{Success: "true"})
-}
-
-type deleteListResponse struct {
-	Success string `json:"data"`
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"success": true,
+	})
 }
 
 func (h *Handler) deleteList(c *gin.Context) {
@@ -122,8 +116,8 @@ func (h *Handler) deleteList(c *gin.Context) {
 		newErrorResponse(c, http.StatusInternalServerError, err.Error())
 		return
 	}
-	c.JSON(http.StatusOK, deleteListResponse{
-		Success: "true",
+	c.JSON(http.StatusOK, map[string]interface{}{
+		"success": true,
 	})
 
 }

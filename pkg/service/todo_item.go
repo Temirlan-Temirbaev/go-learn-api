@@ -28,3 +28,11 @@ func (service *TodoItemService) GetAll(userId int, listId int) ([]todo.TodoItem,
 func (service *TodoItemService) GetById(userId int, itemId int) (todo.TodoItem, error) {
 	return service.repo.GetById(userId, itemId)
 }
+
+func (service *TodoItemService) Update(userId int, itemId int, input todo.UpdateItemInput) error {
+	return service.repo.Update(userId, itemId, input)
+}
+
+func (service *TodoItemService) Delete(userId int, itemId int) error {
+	return service.repo.Delete(userId, itemId)
+}
